@@ -13,17 +13,36 @@ struct Response {
     data: BaseResponse,
 }
 
+enum APIVersion {
+    V2,
+}
+
 
 fn get_price_from_response(response: Response) -> f32 {
   // expected response:
   //  {"data":{"base":"BTC","currency":"USD","amount":"39865.46"}}
-  let price: f32 = response.data.amount.parse().unwrap();
-  return price
+    let price: f32 = response.data.amount.parse().unwrap();
+    return price;
 }
 
+const API_BASE_URL: &str = "https://api.coinbase.com";
+
+fn get_api_version_string(version: APIVersion) -> String {
+    match version {
+        APIVersion::V2 => "v2".to_string()
+    }
+}
+
+fn get_spot_price_url() -> String {
+    let version: APIVersion = APIVersion::V2;
+    return format!("{}/{}/prices/spot", API_BASE_URL, get_api_version_string(version));
+}
+
+
 pub fn get_spot_price() -> f32 {
-            let response = reqwest::blocking::get("https://api.coinbase.com/v2/prices/spot").unwrap();
-            let response_json: Response = response.json().unwrap();
-            let price = get_price_from_response(response_json);
-	    return price;
+    let request_url = get_spot_price_url();
+    let response = reqwest::blocking::get(request_url).unwrap();
+    let response_json: Response = response.json().unwrap();
+    let price = get_price_from_response(response_json);
+    return price;
 }
