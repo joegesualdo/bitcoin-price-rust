@@ -1,4 +1,5 @@
 use reqwest;
+use reqwest::blocking::Response;
 use serde::Deserialize;
 
 const API_BASE_URL: &str = "https://api.coinbase.com";
@@ -11,7 +12,7 @@ struct BaseResponse {
 }
 
 #[derive(Debug, Deserialize)]
-struct Response {
+struct CoinbaseResponse {
     data: BaseResponse,
 }
 
@@ -19,7 +20,7 @@ enum APIVersion {
     V2,
 }
 
-fn get_price_from_response(response: Response) -> f32 {
+fn get_price_from_response(response: CoinbaseResponse) -> f32 {
     // Expected Response:
     //  {
     //    "data": {
@@ -46,9 +47,9 @@ fn get_spot_price_url() -> String {
 
 
 pub fn get_spot_price() -> f32 {
-    let request_url = get_spot_price_url();
-    let response = reqwest::blocking::get(request_url).unwrap();
-    let response_json: Response = response.json().unwrap();
-    let price = get_price_from_response(response_json);
+    let request_url: String = get_spot_price_url();
+    let response: Response = reqwest::blocking::get(request_url).unwrap();
+    let response_json: CoinbaseResponse = response.json().unwrap();
+    let price: f32 = get_price_from_response(response_json);
     return price;
 }
