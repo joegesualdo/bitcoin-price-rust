@@ -35,7 +35,7 @@ fn get_price_from_response(response: Response) -> f32 {
 
 fn get_api_version_string(version: APIVersion) -> String {
     match version {
-        APIVersion::V2 => "v2".to_string()
+        APIVersion::V2 => String::from("v2")
     }
 }
 
