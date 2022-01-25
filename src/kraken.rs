@@ -1,3 +1,4 @@
+// Source: https://docs.kraken.com/rest/
 use reqwest;
 use reqwest::blocking::Response;
 use serde::Deserialize;
