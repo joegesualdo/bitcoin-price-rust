@@ -1,4 +1,4 @@
-# bitcoin-price-rust
+# ⚠️  WIP!⚠️
 
 To run the example:
 
