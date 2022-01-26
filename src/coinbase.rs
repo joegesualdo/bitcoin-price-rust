@@ -29,8 +29,13 @@ fn get_price_from_response(response: CoinbaseResponse) -> f32 {
     //      "currency":"USD",
     //      "amount":"39865.46"
     //    }
-//    }
-    let price: f32 = response.data.amount.parse().unwrap();
+    //  }
+    let price: f32 = 
+        response
+        .data
+        .amount
+        .parse()
+        .unwrap();
     return price;
 }
 
@@ -43,13 +48,19 @@ fn get_api_version_string(version: APIVersion) -> String {
 
 fn get_spot_price_url() -> String {
     let version: APIVersion = APIVersion::V2;
-    return format!("{}/{}/prices/spot", API_BASE_URL, get_api_version_string(version));
+    return format!(
+        "{}/{}/prices/spot",
+        API_BASE_URL,
+        get_api_version_string(version)
+    );
 }
 
 
 pub fn get_spot_price() -> f32 {
     let request_url: String = get_spot_price_url();
-    let response: Response = reqwest::blocking::get(request_url).unwrap();
+    let response: Response = 
+        reqwest::blocking::get(request_url)
+        .unwrap();
     let response_json: CoinbaseResponse = response.json().unwrap();
     let price: f32 = get_price_from_response(response_json);
     return price;
