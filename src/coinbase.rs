@@ -46,8 +46,7 @@ fn get_api_version_string(version: APIVersion) -> String {
     }
 }
 
-fn get_spot_price_url() -> String {
-    let version: APIVersion = APIVersion::V2;
+fn get_spot_price_url(version: APIVersion) -> String {
     return format!(
         "{}/{}/prices/spot",
         API_BASE_URL,
@@ -57,7 +56,8 @@ fn get_spot_price_url() -> String {
 
 
 pub fn get_spot_price() -> f32 {
-    let request_url: String = get_spot_price_url();
+    let version: APIVersion = APIVersion::V2;
+    let request_url: String = get_spot_price_url(version);
     let response: Response = 
         reqwest::blocking::get(request_url)
         .unwrap();
