@@ -62,6 +62,6 @@ pub fn get_spot_price() -> f32 {
         reqwest::blocking::get(request_url)
         .unwrap();
     let response_json: CoinbaseResponse = response.json().unwrap();
-    let price: f32 = get_price_from_response(response_json);
-    return price;
+    let spot_price: f32 = get_price_from_response(response_json);
+    return spot_price;
 }
