@@ -1,7 +1,10 @@
 // Source: https://docs.kraken.com/rest/
-use reqwest;
-use reqwest::blocking::Response;
+// use reqwest;
+// use reqwest::blocking::Response;
 use serde::Deserialize;
+
+#[path = "./request.rs"]
+mod request;
 
 const API_BASE_URL: &str = "https://api.kraken.com";
 
@@ -45,8 +48,7 @@ fn get_spot_price_url() -> String {
 
 pub fn get_spot_price() -> f32 {
     let request_url: String = get_spot_price_url();
-    let response: Response = reqwest::blocking::get(request_url).unwrap();
-    let response_json: KrakenResponse = response.json().unwrap();
+    let response_json: KrakenResponse = request::request(request_url);
     let price: f32 = get_price_from_response(response_json);
     return price;
 }
