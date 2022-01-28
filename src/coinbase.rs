@@ -1,7 +1,8 @@
 // Source: https://developers.coinbase.com/docs/wallet/guides/price-data
-use reqwest;
-use reqwest::blocking::Response;
 use serde::Deserialize;
+
+#[path = "./request.rs"]
+mod request;
 
 const API_BASE_URL: &str = "https://api.coinbase.com";
 
@@ -58,10 +59,7 @@ fn get_spot_price_url(version: APIVersion) -> String {
 pub fn get_spot_price() -> f32 {
     let version: APIVersion = APIVersion::V2;
     let request_url: String = get_spot_price_url(version);
-    let response: Response = 
-        reqwest::blocking::get(request_url)
-        .unwrap();
-    let response_json: CoinbaseResponse = response.json().unwrap();
-    let spot_price: f32 = get_price_from_response(response_json);
-    return spot_price;
+    let response: CoinbaseResponse = request::request(request_url);
+    let price: f32 = get_price_from_response(response);
+    return price;
 }
