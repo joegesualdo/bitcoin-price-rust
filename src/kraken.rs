@@ -8,7 +8,6 @@ mod request;
 
 const API_BASE_URL: &str = "https://api.kraken.com";
 
-
 type PriceResponse = [String; 2];
 
 #[derive(Debug, Deserialize)]
