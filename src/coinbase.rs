@@ -26,6 +26,14 @@ enum Currency {
     USD,
 }
 
+pub type Price = f32;
+
+pub struct PriceData {
+    pub spot: Price,
+    pub buy: Price,
+    pub sell: Price,
+}
+
 fn get_price_from_response(response: CoinbaseResponse) -> f32 {
     // Expected Response:
     //  {
@@ -110,4 +118,12 @@ pub fn get_sell_price() -> f32 {
     let response: CoinbaseResponse = request::request(request_url);
     let price: f32 = get_price_from_response(response);
     return price;
+}
+
+pub fn get_price_data() -> PriceData {
+    PriceData {
+        spot: get_sell_price(),
+        buy: get_buy_price(),
+        sell: get_spot_price(),
+    }
 }

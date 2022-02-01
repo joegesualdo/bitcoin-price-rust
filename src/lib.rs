@@ -2,15 +2,15 @@ mod coinbase;
 mod kraken;
 
 pub fn get_coinbase_price() -> f32 {
-    return coinbase::get_spot_price();
+    return coinbase::get_price_data().spot;
 }
 
 pub fn get_coinbase_buy_price() -> f32 {
-    return coinbase::get_buy_price();
+    return coinbase::get_price_data().buy;
 }
 
 pub fn get_coinbase_sell_price() -> f32 {
-    return coinbase::get_sell_price();
+    return coinbase::get_price_data().sell;
 }
 
 pub fn get_kraken_price() -> f32 {
