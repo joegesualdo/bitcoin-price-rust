@@ -111,6 +111,7 @@ fn get_price_from_response(response: KrakenResponse) -> f32 {
 fn get_spot_price_url() -> String {
     return format!("{}/0/public/Ticker?pair=XBTUSD", API_BASE_URL);
 }
+
 fn convert_response_to_market_data(response: KrakenResponse) -> MarketData {
     MarketData {
         ask: Ask {
