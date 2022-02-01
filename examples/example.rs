@@ -6,6 +6,9 @@ fn main() {
     let coinbase_buy_price = bitcoin_price::get_coinbase_buy_price();
     let coinbase_buy_price_string = coinbase_buy_price.to_string();
     println!("coinbase buy price: {}", coinbase_buy_price_string);
+    let coinbase_sell_price = bitcoin_price::get_coinbase_sell_price();
+    let coinbase_sell_price_string = coinbase_sell_price.to_string();
+    println!("coinbase sell price: {}", coinbase_sell_price_string);
     let kraken_price = bitcoin_price::get_kraken_price();
     let kraken_price_string = kraken_price.to_string();
     println!("kraken: {}", kraken_price_string);
