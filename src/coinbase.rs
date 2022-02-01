@@ -22,6 +22,10 @@ enum APIVersion {
     V2,
 }
 
+enum Currency {
+    USD,
+}
+
 fn get_price_from_response(response: CoinbaseResponse) -> f32 {
     // Expected Response:
     //  {
@@ -47,18 +51,44 @@ fn get_api_version_string(version: APIVersion) -> String {
     }
 }
 
-fn get_spot_price_url(version: APIVersion) -> String {
+fn get_currency_string(currency: Currency) -> String {
+    match currency {
+        Currency::USD => String::from("USD")
+    }
+}
+
+fn get_spot_price_url(version: APIVersion, currency: Currency) -> String {
     return format!(
-        "{}/{}/prices/spot",
+        "{}/{}/prices/BTC-{}/spot",
         API_BASE_URL,
-        get_api_version_string(version)
+        get_api_version_string(version),
+        get_currency_string(currency)
+    );
+}
+
+fn get_buy_price_url(version: APIVersion, currency: Currency) -> String {
+    return format!(
+        "{}/{}/prices/BTC-{}/buy",
+        API_BASE_URL,
+        get_api_version_string(version),
+        get_currency_string(currency)
     );
 }
 
 
 pub fn get_spot_price() -> f32 {
     let version: APIVersion = APIVersion::V2;
-    let request_url: String = get_spot_price_url(version);
+    let currency: Currency = Currency::USD;
+    let request_url: String = get_spot_price_url(version, currency);
+    let response: CoinbaseResponse = request::request(request_url);
+    let price: f32 = get_price_from_response(response);
+    return price;
+}
+
+pub fn get_buy_price() -> f32 {
+    let version: APIVersion = APIVersion::V2;
+    let currency: Currency = Currency::USD;
+    let request_url: String = get_buy_price_url(version, currency);
     let response: CoinbaseResponse = request::request(request_url);
     let price: f32 = get_price_from_response(response);
     return price;
