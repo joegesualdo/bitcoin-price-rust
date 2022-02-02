@@ -3,6 +3,8 @@
 use serde::Deserialize;
 use crate::request;
 use crate::currencies::{Currency, CryptoCurrency, FiatCurrency};
+use CryptoCurrency::*;
+use FiatCurrency::*;
 
 #[derive(Debug, Deserialize)]
 pub struct BaseResponse {
@@ -27,8 +29,8 @@ pub const API_BASE_URL: &str = "https://api.coinbase.com";
 
 fn get_currency_string_for_url(currency: Currency) -> String {
     match currency {
-        Currency::FiatCurrency(FiatCurrency::USD) => String::from("USD"),
-        Currency::CryptoCurrency(CryptoCurrency::BTC) => String::from("BTC")
+        Currency::FiatCurrency(USD) => String::from("USD"),
+        Currency::CryptoCurrency(BTC) => String::from("BTC")
     }
 }
 
@@ -69,7 +71,7 @@ fn get_api_version_string(version: APIVersion) -> String {
 
 pub fn request_spot_price() -> SpotPriceResponse {
     let version: APIVersion = APIVersion::V2;
-    let currency: Currency = Currency::FiatCurrency(FiatCurrency::USD);
+    let currency: Currency = Currency::FiatCurrency(USD);
     let request_url: String = get_spot_price_url(version, currency);
     let response: CoinbasePriceResponse = request::request(request_url);
     return response;
@@ -77,7 +79,7 @@ pub fn request_spot_price() -> SpotPriceResponse {
 
 pub fn request_buy_price() -> BuyPriceResponse {
     let version: APIVersion = APIVersion::V2;
-    let currency: Currency = Currency::FiatCurrency(FiatCurrency::USD);
+    let currency: Currency = Currency::FiatCurrency(USD);
     let request_url: String = get_buy_price_url(version, currency);
     let response: CoinbasePriceResponse = request::request(request_url);
     return response;
@@ -85,7 +87,7 @@ pub fn request_buy_price() -> BuyPriceResponse {
 
 pub fn request_sell_price() -> SellPriceResponse {
     let version: APIVersion = APIVersion::V2;
-    let currency: Currency = Currency::FiatCurrency(FiatCurrency::USD);
+    let currency: Currency = Currency::FiatCurrency(USD);
     let request_url: String = get_sell_price_url(version, currency);
     let response: CoinbasePriceResponse = request::request(request_url);
     return response;
