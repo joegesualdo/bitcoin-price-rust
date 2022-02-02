@@ -15,7 +15,7 @@ pub fn get_price_data() -> PriceData {
         sell: get_spot_price(),
     }
 }
-pub fn get_spot_price() -> f32 {
+pub fn get_spot_price() -> Price {
     let response: api::SpotPriceResponse = api::request_spot_price();
     let price: f32 = 
         response
@@ -25,7 +25,7 @@ pub fn get_spot_price() -> f32 {
         .unwrap();
     return price;
 }
-pub fn get_buy_price() -> f32 {
+pub fn get_buy_price() -> Price {
     let response: api::BuyPriceResponse = api::request_buy_price();
     let price: f32 = 
         response
@@ -35,7 +35,7 @@ pub fn get_buy_price() -> f32 {
         .unwrap();
     return price;
 }
-pub fn get_sell_price() -> f32 {
+pub fn get_sell_price() -> Price {
     let response: api::SellPriceResponse = api::request_sell_price();
     let price: f32 = 
         response

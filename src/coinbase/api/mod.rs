@@ -25,9 +25,11 @@ enum APIVersion {
     V2,
 }
 
+type URLString = String;
+
 pub const API_BASE_URL: &str = "https://api.coinbase.com";
 
-fn get_currency_string_for_url(currency: Currency) -> String {
+fn get_currency_string_for_url(currency: Currency) -> URLString {
     match currency {
         Currency::FiatCurrency(USD) => String::from("USD"),
         Currency::CryptoCurrency(BTC) => String::from("BTC")
@@ -35,7 +37,7 @@ fn get_currency_string_for_url(currency: Currency) -> String {
 }
 
 
-fn get_spot_price_url(version: APIVersion, currency: Currency) -> String {
+fn get_spot_price_url(version: APIVersion, currency: Currency) -> URLString {
     return format!(
         "{}/{}/prices/{}-{}/spot",
         API_BASE_URL,
@@ -45,20 +47,22 @@ fn get_spot_price_url(version: APIVersion, currency: Currency) -> String {
     );
 }
 
-fn get_buy_price_url(version: APIVersion, currency: Currency) -> String {
+fn get_buy_price_url(version: APIVersion, currency: Currency) -> URLString {
     return format!(
-        "{}/{}/prices/BTC-{}/buy",
+        "{}/{}/prices/{}-{}/buy",
         API_BASE_URL,
         get_api_version_string(version),
+        get_currency_string_for_url(Currency::CryptoCurrency(CryptoCurrency::BTC)),
         get_currency_string_for_url(currency)
     );
 }
 
 fn get_sell_price_url(version: APIVersion, currency: Currency) -> String {
     return format!(
-        "{}/{}/prices/BTC-{}/sell",
+        "{}/{}/prices/{}-{}/sell",
         API_BASE_URL,
         get_api_version_string(version),
+        get_currency_string_for_url(Currency::CryptoCurrency(CryptoCurrency::BTC)),
         get_currency_string_for_url(currency)
     );
 }
