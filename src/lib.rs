@@ -2,6 +2,8 @@
 //!
 //! `bitcoin_price` is an easy way to get the current market data for bitcoin.
 
+mod request;
+mod currencies;
 mod coinbase;
 mod kraken;
 

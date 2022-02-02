@@ -1,8 +1,7 @@
 // Source: https://docs.kraken.com/rest/
 use serde::Deserialize;
 
-#[path = "./request.rs"]
-mod request;
+use crate::request;
 
 const API_BASE_URL: &str = "https://api.kraken.com";
 
