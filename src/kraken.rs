@@ -1,6 +1,4 @@
 // Source: https://docs.kraken.com/rest/
-// use reqwest;
-// use reqwest::blocking::Response;
 use serde::Deserialize;
 
 #[path = "./request.rs"]
@@ -91,7 +89,7 @@ struct ResultResponse {
 
 #[derive(Debug, Deserialize)]
 struct KrakenResponse {
-    // error: 
+    // error:
     result: ResultResponse,
 }
 
@@ -103,7 +101,7 @@ fn get_price_from_response(response: KrakenResponse) -> f32 {
     //      "currency":"USD",
     //      "amount":"39865.46"
     //    }
-//    }
+    //    }
     let price: f32 = response.result.XXBTZUSD.c.first().unwrap().parse().unwrap();
     return price;
 }
@@ -151,7 +149,6 @@ fn convert_response_to_market_data(response: KrakenResponse) -> MarketData {
         todays_opening_price: response.result.XXBTZUSD.o.parse().unwrap(),
     }
 }
-
 
 pub fn get_spot_price() -> f32 {
     let request_url: String = get_spot_price_url();
