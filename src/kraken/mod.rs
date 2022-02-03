@@ -1,4 +1,5 @@
 // Source: https://docs.kraken.com/rest/
+#![allow(dead_code)]
 
 mod api;
 
@@ -11,50 +12,42 @@ struct Ask {
     lot_volume: f32,
 }
 
-#[allow(dead_code)]
 struct Bid {
     price: Price,
     whole_lot_volume: u32,
     lot_volume: f32,
 }
 
-#[allow(dead_code)]
 struct LastTradeClosed {
     price: Price,
     lot_volume: f32,
 }
 
-#[allow(dead_code)]
 struct Volume {
     today: f32,
     last_twenty_four_hours: f32,
 }
 
-#[allow(dead_code)]
 struct VolumeWeightedAveragePrice {
     today: Price,
     last_twenty_four_hours: Price,
 }
 
-#[allow(dead_code)]
 struct NumberOfTrades {
     today: u32,
     last_twenty_four_hours: u32,
 }
 
-#[allow(dead_code)]
 struct LowPrice {
     today: Price,
     last_twenty_four_hours: Price,
 }
 
-#[allow(dead_code)]
 struct HighPrice {
     today: Price,
     last_twenty_four_hours: Price,
 }
 
-#[allow(dead_code)]
 struct MarketData {
     ask: Ask,
     bid: Bid,
