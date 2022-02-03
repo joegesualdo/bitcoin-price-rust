@@ -1,73 +1,60 @@
 // Source: https://docs.kraken.com/rest/
-use serde::Deserialize;
 
-use crate::request;
-
-const API_BASE_URL: &str = "https://api.kraken.com";
-
-type AskResponse = [String; 3];
-type BidResponse = [String; 3];
-type LastTradeCloseResponse = [String; 2];
-type VolumeResponse = [String; 2];
-type VolumeWeightedAveragePriceResponse = [String; 2];
-type NumberOfTradesResponse = [u32; 2];
-type LowResponse = [String; 2];
-type HighResponse = [String; 2];
-type OpeningPriceResponse = String;
-
-#[derive(Debug, Deserialize)]
-struct XXBTZUSDResponse {
-    a: AskResponse,
-    b: BidResponse,
-    c: LastTradeCloseResponse,
-    v: VolumeResponse,
-    p: VolumeWeightedAveragePriceResponse,
-    t: NumberOfTradesResponse,
-    l: LowResponse,
-    h: HighResponse,
-    o: OpeningPriceResponse,
-}
+mod api;
 
 type Price = f32;
+
+#[allow(dead_code)]
 struct Ask {
     price: Price,
     whole_lot_volume: u32,
     lot_volume: f32,
 }
 
+#[allow(dead_code)]
 struct Bid {
     price: Price,
     whole_lot_volume: u32,
     lot_volume: f32,
 }
 
+#[allow(dead_code)]
 struct LastTradeClosed {
     price: Price,
     lot_volume: f32,
 }
 
+#[allow(dead_code)]
 struct Volume {
     today: f32,
     last_twenty_four_hours: f32,
 }
 
+#[allow(dead_code)]
 struct VolumeWeightedAveragePrice {
     today: Price,
     last_twenty_four_hours: Price,
 }
+
+#[allow(dead_code)]
 struct NumberOfTrades {
     today: u32,
     last_twenty_four_hours: u32,
 }
+
+#[allow(dead_code)]
 struct LowPrice {
     today: Price,
     last_twenty_four_hours: Price,
 }
+
+#[allow(dead_code)]
 struct HighPrice {
     today: Price,
     last_twenty_four_hours: Price,
 }
 
+#[allow(dead_code)]
 struct MarketData {
     ask: Ask,
     bid: Bid,
@@ -80,36 +67,7 @@ struct MarketData {
     todays_opening_price: Price,
 }
 
-#[derive(Debug, Deserialize)]
-#[allow(non_snake_case)]
-struct ResultResponse {
-    XXBTZUSD: XXBTZUSDResponse,
-}
-
-#[derive(Debug, Deserialize)]
-struct KrakenResponse {
-    // error:
-    result: ResultResponse,
-}
-
-fn get_price_from_response(response: KrakenResponse) -> f32 {
-    // Expected Response:
-    //  {
-    //    "data": {
-    //      "base":"BTC",
-    //      "currency":"USD",
-    //      "amount":"39865.46"
-    //    }
-    //    }
-    let price: f32 = response.result.XXBTZUSD.c.first().unwrap().parse().unwrap();
-    return price;
-}
-
-fn get_spot_price_url() -> String {
-    return format!("{}/0/public/Ticker?pair=XBTUSD", API_BASE_URL);
-}
-
-fn convert_response_to_market_data(response: KrakenResponse) -> MarketData {
+fn convert_response_to_market_data(response: api::KrakenResponse) -> MarketData {
     MarketData {
         ask: Ask {
             price: response.result.XXBTZUSD.a[0].parse().unwrap(),
@@ -149,9 +107,8 @@ fn convert_response_to_market_data(response: KrakenResponse) -> MarketData {
     }
 }
 
-pub fn get_spot_price() -> f32 {
-    let request_url: String = get_spot_price_url();
-    let response_json: KrakenResponse = request::request(request_url);
+pub fn get_spot_price() -> Price {
+    let response_json: api::KrakenResponse = api::request_market_data();
     let market_data: MarketData = convert_response_to_market_data(response_json);
     let price: f32 = market_data.last_trade_closed.price;
     return price;

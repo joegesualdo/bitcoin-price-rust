@@ -1,4 +1,5 @@
-struct CurrencyData {
+#[allow(dead_code)]
+pub struct CurrencyData {
     code: String,
     name: String,
 }
@@ -16,6 +17,7 @@ pub enum Currency {
     CryptoCurrency(CryptoCurrency)
 }
 
+#[allow(dead_code)]
 fn get_data_for_fiat_currency(currency: Currency) -> CurrencyData {
     match currency {
         Currency::FiatCurrency(FiatCurrency::USD) => CurrencyData {
