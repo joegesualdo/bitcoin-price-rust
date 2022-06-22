@@ -16,17 +16,17 @@ pub fn get_price_data() -> PriceData {
     }
 }
 pub fn get_spot_price() -> Price {
-    let response: api::SpotPriceResponse = api::request_spot_price();
+    let response: api::v2::SpotPriceResponse = api::v2::request_spot_price();
     let price: f32 = response.data.amount.parse().unwrap();
     return price;
 }
 pub fn get_buy_price() -> Price {
-    let response: api::BuyPriceResponse = api::request_buy_price();
+    let response: api::v2::BuyPriceResponse = api::v2::request_buy_price();
     let price: f32 = response.data.amount.parse().unwrap();
     return price;
 }
 pub fn get_sell_price() -> Price {
-    let response: api::SellPriceResponse = api::request_sell_price();
+    let response: api::v2::SellPriceResponse = api::v2::request_sell_price();
     let price: f32 = response.data.amount.parse().unwrap();
     return price;
 }
