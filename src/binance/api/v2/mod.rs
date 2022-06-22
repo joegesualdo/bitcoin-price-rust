@@ -1,4 +1,4 @@
-// Source: https://developers.coinbase.com/docs/wallet/guides/price-data
+// Source: https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker
 use serde::Deserialize;
 use crate::request;
 use crate::currencies::{Currency, CryptoCurrency};
