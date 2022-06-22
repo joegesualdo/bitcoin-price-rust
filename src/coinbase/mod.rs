@@ -10,9 +10,9 @@ pub struct PriceData {
 
 pub fn get_price_data() -> PriceData {
     PriceData {
-        spot: get_sell_price(),
+        spot: get_spot_price(),
         buy: get_buy_price(),
-        sell: get_spot_price(),
+        sell: get_sell_price(),
     }
 }
 pub fn get_spot_price() -> Price {
