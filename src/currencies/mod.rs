@@ -11,6 +11,7 @@ pub enum FiatCurrency {
 
 pub enum CryptoCurrency {
     BTC,
+    USDT
 }
 
 pub enum Currency {
@@ -23,6 +24,10 @@ fn get_data_for_fiat_currency(currency: Currency) -> CurrencyData {
         Currency::FiatCurrency(FiatCurrency::USD) => CurrencyData {
             code: String::from("USD"),
             name: String::from("US Dollar"),
+        },
+        Currency::CryptoCurrency(CryptoCurrency::USDT) => CurrencyData {
+            code: String::from("USDT"),
+            name: String::from("Tether"),
         },
         Currency::CryptoCurrency(CryptoCurrency::BTC) => CurrencyData {
             code: String::from("BTC"),

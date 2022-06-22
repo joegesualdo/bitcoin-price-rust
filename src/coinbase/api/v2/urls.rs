@@ -1,5 +1,6 @@
-use crate::currencies::{Currency, CryptoCurrency};
+use crate::currencies::{Currency, CryptoCurrency, FiatCurrency};
 use CryptoCurrency::*;
+use FiatCurrency::*;
 
 enum APIVersion {
     V2,
@@ -18,6 +19,7 @@ fn get_api_version_string(version: APIVersion) -> String {
 pub fn get_currency_string_for_url(currency: Currency) -> URLString {
     match currency {
         Currency::FiatCurrency(USD) => String::from("USD"),
+        Currency::CryptoCurrency(USDT) => String::from("USDT"),
         Currency::CryptoCurrency(BTC) => String::from("BTC")
     }
 }

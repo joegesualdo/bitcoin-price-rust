@@ -15,6 +15,9 @@ fn main() {
     let ftx_price = bitcoin_price::get_ftx_price();
     let ftx_price_string = ftx_price.to_string();
     println!("ftx: {}", ftx_price_string);
+    let binance_price = bitcoin_price::get_binance_price();
+    let binance_price_string = binance_price.to_string();
+    println!("binance: {}", binance_price_string);
     let average_exchange_price = bitcoin_price::get_average_exchange_spot_price();
     let average_exchange_price_string = average_exchange_price.to_string();
     println!("average_exchange_price: {}", average_exchange_price_string);
