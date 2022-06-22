@@ -9,6 +9,12 @@ mod kraken;
 mod ftx;
 mod binance;
 
+// From: https://benjaminbrandt.com/averages-in-rust/
+fn get_mean(list: &[f32]) -> f64 {
+    let sum: f32 = Iterator::sum(list.iter());
+    f64::from(sum) / (list.len() as f64)
+}
+
 pub fn get_coinbase_price() -> f32 {
     return coinbase::get_price_data().spot;
 }
@@ -39,11 +45,13 @@ pub fn get_binance_price() -> f32 {
 /// let price = bitcoin_price::get_average_exachange_spot_price();
 /// assert_eq!(1,1);
 /// ```
-pub fn get_average_exchange_spot_price() -> f32 {
-    let coinbase_price: f32 = coinbase::get_spot_price();
-    let kraken_price: f32 = kraken::get_spot_price();
-    let ftx_price: f32 = ftx::get_last_price();
-    let binance_price: f32 = binance::get_latest_price();
-    let average_price: f32 = (coinbase_price + kraken_price + ftx_price + binance_price) / 4.0;
+pub fn get_average_exchange_spot_price() -> f64 {
+    let list = vec![
+        coinbase::get_spot_price(),
+        kraken::get_spot_price(),
+        ftx::get_last_price(),
+        binance::get_latest_price(),
+    ];
+    let average_price: f64 = get_mean(&list);
     return average_price;
 }
