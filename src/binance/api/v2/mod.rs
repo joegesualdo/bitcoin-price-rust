@@ -6,6 +6,7 @@ use CryptoCurrency::*;
 
 mod urls;
 
+#[allow(non_snake_case)]
 #[derive(Debug, Deserialize)]
 pub struct BinanceTickerResponse {
     // pub symbol: String,

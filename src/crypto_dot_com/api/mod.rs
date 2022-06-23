@@ -1,7 +1,8 @@
 use serde::Deserialize;
 use crate::request;
-use crate::currencies::{Currency, CryptoCurrency};
+use crate::currencies::{Currency, CryptoCurrency, FiatCurrency};
 use CryptoCurrency::*;
+use FiatCurrency::*;
 
 type URLString = String;
 
