@@ -8,6 +8,7 @@ mod coinbase;
 mod kraken;
 mod ftx;
 mod binance;
+mod crypto_dot_com;
 
 // From: https://benjaminbrandt.com/averages-in-rust/
 fn get_mean(list: &[f32]) -> f64 {
@@ -37,6 +38,9 @@ pub fn get_ftx_price() -> f32 {
 pub fn get_binance_price() -> f32 {
     return binance::get_latest_price();
 }
+pub fn get_crypto_dot_com_price() -> f32 {
+    return crypto_dot_com::get_price();
+}
 
 /// This gets the average spot price across multiple exchanges
 ///
@@ -51,6 +55,7 @@ pub fn get_average_exchange_spot_price() -> f64 {
         kraken::get_spot_price(),
         ftx::get_last_price(),
         binance::get_latest_price(),
+        crypto_dot_com::get_price(),
     ];
     let average_price: f64 = get_mean(&list);
     return average_price;
