@@ -32,6 +32,7 @@ pub fn get_coinbase_sell_price() -> f32 {
 pub fn get_kraken_price() -> f32 {
     return kraken::get_spot_price();
 }
+
 pub fn get_ftx_price() -> f32 {
     return ftx::get_last_price();
 }
@@ -39,6 +40,7 @@ pub fn get_ftx_price() -> f32 {
 pub fn get_binance_price() -> f32 {
     return binance::get_latest_price();
 }
+
 pub fn get_crypto_dot_com_price() -> f32 {
     return crypto_dot_com::get_price();
 }
