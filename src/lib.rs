@@ -2,9 +2,10 @@
 //!
 //! `bitcoin_price` is an easy way to get the current market data for bitcoin.
 
+use coinbase_bitcoin;
+
 mod request;
 mod currencies;
-mod coinbase;
 mod kraken;
 mod ftx;
 mod binance;
@@ -17,15 +18,15 @@ fn get_mean(list: &[f32]) -> f64 {
 }
 
 pub fn get_coinbase_price() -> f32 {
-    return coinbase::get_price_data().spot;
+    return coinbase_bitcoin::get_price_data().spot;
 }
 
 pub fn get_coinbase_buy_price() -> f32 {
-    return coinbase::get_price_data().buy;
+    return coinbase_bitcoin::get_price_data().buy;
 }
 
 pub fn get_coinbase_sell_price() -> f32 {
-    return coinbase::get_price_data().sell;
+    return coinbase_bitcoin::get_price_data().sell;
 }
 
 pub fn get_kraken_price() -> f32 {
@@ -51,7 +52,7 @@ pub fn get_crypto_dot_com_price() -> f32 {
 /// ```
 pub fn get_average_exchange_spot_price() -> f64 {
     let list = vec![
-        coinbase::get_spot_price(),
+        coinbase_bitcoin::get_spot_price(),
         kraken::get_spot_price(),
         ftx::get_last_price(),
         binance::get_latest_price(),

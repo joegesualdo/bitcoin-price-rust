@@ -1,6 +1,7 @@
 use bitcoin_price;
+use coinbase_bitcoin;
 fn main() {
-    let coinbase_price = bitcoin_price::get_coinbase_price();
+    let coinbase_price = coinbase_bitcoin::get_price_data().spot;
     let coinbase_price_string = coinbase_price.to_string();
     println!("coinbase: {}", coinbase_price_string);
     let coinbase_buy_price = bitcoin_price::get_coinbase_buy_price();

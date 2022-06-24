@@ -10,3 +10,4 @@ license = "MIT"
 [dependencies]
 reqwest = { version = "0.11", features = ["blocking", "json"] }
 serde = { version = "1", features = ["derive"] }
+coinbase-bitcoin = { version = "0.1.0" }
