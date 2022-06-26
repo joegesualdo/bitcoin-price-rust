@@ -10,11 +10,14 @@ enum APIVersion {
     V2,
 }
 
+const API_BASE_URL: &str = "https://api.crypto.com";
+
 pub fn get_currency_string_for_url(currency: Currency) -> URLString {
     match currency {
         Currency::FiatCurrency(USD) => String::from("USD"),
         Currency::CryptoCurrency(USDT) => String::from("USDT"),
-        Currency::CryptoCurrency(BTC) => String::from("BTC")
+        Currency::CryptoCurrency(BTC) => String::from("BTC"),
+        _ => panic!("Currency not supported")
     }
 }
 
@@ -24,7 +27,6 @@ fn get_api_version_string(version: APIVersion) -> String {
     }
 }
 
-const API_BASE_URL: &str = "https://api.crypto.com";
 
 type InstrumentNameResponse = String;
 type CurrentBestBidResponse = f32;
