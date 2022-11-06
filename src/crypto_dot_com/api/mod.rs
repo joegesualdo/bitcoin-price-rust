@@ -31,7 +31,7 @@ fn get_api_version_string(version: APIVersion) -> String {
 type InstrumentNameResponse = String;
 type CurrentBestBidResponse = f32;
 type CurrentBestAskResponse = f32;
-type PriceOfLatestTradeResponse = f32;
+type PriceOfLatestTradeResponse = String;
 type TimestampResponse = f32;
 type TwentyFourHourTradedVolume = f32;
 type PriceOfTwentyFourHourHighestTrade = f32;
@@ -40,21 +40,21 @@ type PriceOfTwentyFourHourLowestTrade = f32;
 
 #[derive(Debug, Deserialize)]
 pub struct DataResponse {
-    pub i: InstrumentNameResponse,
-    pub b: CurrentBestBidResponse,
-    pub k: CurrentBestAskResponse,
+    // pub i: InstrumentNameResponse,
+    // pub b: CurrentBestBidResponse,
+    // pub k: CurrentBestAskResponse,
     pub a: PriceOfLatestTradeResponse,
-    pub t: TimestampResponse,
-    pub v: TwentyFourHourTradedVolume,
-    pub h: PriceOfTwentyFourHourHighestTrade,
-    pub l: PriceOfTwentyFourHourLowestTrade,
+    // pub t: TimestampResponse,
+    // pub v: TwentyFourHourTradedVolume,
+    // pub h: PriceOfTwentyFourHourHighestTrade,
+    // pub l: PriceOfTwentyFourHourLowestTrade,
     // pub c: TwentyFourHourPriceChange,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct ResultResponse {
-    pub instrument_name: String,
-    pub data: DataResponse,
+    // pub instrument_name: String,
+    pub data: Vec<DataResponse>,
 }
 #[derive(Debug, Deserialize)]
 #[allow(non_snake_case)]
