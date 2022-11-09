@@ -1,7 +1,8 @@
 // Source: https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker
-use serde::Deserialize;
+use crate::currencies::{CryptoCurrency, Currency};
 use crate::request;
-use crate::currencies::{Currency, CryptoCurrency};
+use anyhow::{Ok, Result};
+use serde::Deserialize;
 use CryptoCurrency::*;
 
 mod urls;
@@ -23,12 +24,12 @@ pub struct BinanceTickerResponse {
     // pub close_time: i32,
     // pub first_id: i32,
     // pub last_id: i32,
-    // pub count: i32 
+    // pub count: i32
 }
 
-pub fn request_latest_price() -> BinanceTickerResponse{
+pub fn request_latest_price() -> Result<BinanceTickerResponse> {
     let currency: Currency = Currency::CryptoCurrency(USDT);
     let request_url: String = urls::get_latest_price_url(currency);
-    let response: BinanceTickerResponse = request::request(request_url);
-    return response;
+    let response: BinanceTickerResponse = request::request(request_url)?;
+    return Ok(response);
 }

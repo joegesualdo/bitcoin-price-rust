@@ -1,6 +1,7 @@
-use serde::Deserialize;
+use crate::currencies::{CryptoCurrency, Currency, FiatCurrency};
 use crate::request;
-use crate::currencies::{Currency, CryptoCurrency, FiatCurrency};
+use anyhow::{Ok, Result};
+use serde::Deserialize;
 use CryptoCurrency::*;
 use FiatCurrency::*;
 
@@ -17,16 +18,15 @@ pub fn get_currency_string_for_url(currency: Currency) -> URLString {
         Currency::FiatCurrency(USD) => String::from("USD"),
         Currency::CryptoCurrency(USDT) => String::from("USDT"),
         Currency::CryptoCurrency(BTC) => String::from("BTC"),
-        _ => panic!("Currency not supported")
+        _ => panic!("Currency not supported"),
     }
 }
 
 fn get_api_version_string(version: APIVersion) -> String {
     match version {
-        APIVersion::V2 => String::from("v2")
+        APIVersion::V2 => String::from("v2"),
     }
 }
-
 
 type InstrumentNameResponse = String;
 type CurrentBestBidResponse = f32;
@@ -78,10 +78,9 @@ pub fn get_ticker_url(currency: Currency) -> URLString {
     );
 }
 
-pub fn request_ticker_data() -> CryptoDotComResponse {
+pub fn request_ticker_data() -> Result<CryptoDotComResponse> {
     let currency: Currency = Currency::CryptoCurrency(USDT);
     let request_url: String = get_ticker_url(currency);
-    let response_json: CryptoDotComResponse = request::request(request_url);
-    return response_json
+    let response_json: CryptoDotComResponse = request::request(request_url)?;
+    return Ok(response_json);
 }
-

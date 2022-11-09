@@ -1,6 +1,6 @@
 [package]
 name = "bitcoin-price"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2018"
 description = "Get the Bitcoin price"
 license = "MIT"
@@ -10,4 +10,6 @@ license = "MIT"
 [dependencies]
 reqwest = { version = "0.11", features = ["blocking", "json"] }
 serde = { version = "1", features = ["derive"] }
-coinbase-bitcoin = { version = "0.1.0" }
+coinbase-bitcoin = { version = "0.1.1" }
+anyhow = "1.0.66"
+thiserror = "1.0.37"
