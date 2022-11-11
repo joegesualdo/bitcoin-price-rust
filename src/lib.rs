@@ -66,10 +66,6 @@ pub fn get_average_exchange_spot_price() -> f64 {
         Ok(price) => list.push(price),
         Err(_err) => {}
     }
-    match ftx::get_last_price() {
-        Ok(price) => list.push(price),
-        Err(_err) => {}
-    }
     match binance::get_latest_price() {
         Ok(price) => list.push(price),
         Err(_err) => {}
