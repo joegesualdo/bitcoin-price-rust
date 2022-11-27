@@ -1,4 +1,4 @@
-use crate::currencies::{Currency, CryptoCurrency};
+use crate::currencies::{CryptoCurrency, Currency};
 use CryptoCurrency::*;
 
 enum APIVersion {
@@ -11,7 +11,7 @@ pub const API_BASE_URL: &str = "https://api.binance.com";
 
 fn get_api_version_string(version: APIVersion) -> String {
     match version {
-        APIVersion::V3 => String::from("v3")
+        APIVersion::V3 => String::from("v3"),
     }
 }
 
@@ -19,10 +19,9 @@ pub fn get_currency_string_for_url(currency: Currency) -> URLString {
     match currency {
         Currency::CryptoCurrency(USDT) => String::from("USDT"),
         Currency::CryptoCurrency(BTC) => String::from("BTC"),
-        _ => panic!("Currency not supported")
+        _ => panic!("Currency not supported"),
     }
 }
-
 
 pub fn get_latest_price_url(currency: Currency) -> URLString {
     return format!(
