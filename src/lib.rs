@@ -36,6 +36,7 @@ pub fn get_kraken_price() -> Result<f32> {
     kraken::get_spot_price()
 }
 
+// TODO: Delete
 pub fn get_ftx_price() -> Result<f32> {
     ftx::get_last_price()
 }
