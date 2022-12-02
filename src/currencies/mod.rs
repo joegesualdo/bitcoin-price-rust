@@ -11,12 +11,12 @@ pub enum FiatCurrency {
 
 pub enum CryptoCurrency {
     BTC,
-    USDT
+    USDT,
 }
 
 pub enum Currency {
     FiatCurrency(FiatCurrency),
-    CryptoCurrency(CryptoCurrency)
+    CryptoCurrency(CryptoCurrency),
 }
 
 fn get_data_for_fiat_currency(currency: Currency) -> CurrencyData {
