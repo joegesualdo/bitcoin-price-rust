@@ -1,6 +1,4 @@
 use anyhow::Result;
-use bitcoin_price;
-use coinbase_bitcoin;
 fn main() -> Result<()> {
     let coinbase_price = coinbase_bitcoin::get_price_data()?.spot;
     let coinbase_price_string = coinbase_price.to_string();
@@ -14,9 +12,6 @@ fn main() -> Result<()> {
     let kraken_price = bitcoin_price::get_kraken_price()?;
     let kraken_price_string = kraken_price.to_string();
     println!("kraken: {}", kraken_price_string);
-    let ftx_price = bitcoin_price::get_ftx_price()?;
-    let ftx_price_string = ftx_price.to_string();
-    println!("ftx: {}", ftx_price_string);
     let binance_price = bitcoin_price::get_binance_price()?;
     let binance_price_string = binance_price.to_string();
     println!("binance: {}", binance_price_string);

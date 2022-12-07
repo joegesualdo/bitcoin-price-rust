@@ -7,7 +7,7 @@ enum APIVersion {
 
 type URLString = String;
 
-pub const API_BASE_URL: &str = "https://api.binance.com";
+pub const API_BASE_URL: &str = "https://api.binance.us";
 
 fn get_api_version_string(version: APIVersion) -> String {
     match version {

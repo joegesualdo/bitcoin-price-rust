@@ -7,7 +7,6 @@ use anyhow::Result;
 mod binance;
 mod crypto_dot_com;
 mod currencies;
-mod ftx;
 mod kraken;
 mod request;
 
@@ -34,11 +33,6 @@ pub fn get_coinbase_sell_price() -> Result<f32> {
 
 pub fn get_kraken_price() -> Result<f32> {
     kraken::get_spot_price()
-}
-
-// TODO: Delete
-pub fn get_ftx_price() -> Result<f32> {
-    ftx::get_last_price()
 }
 
 pub fn get_binance_price() -> Result<f32> {
