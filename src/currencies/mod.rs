@@ -6,12 +6,12 @@ pub struct CurrencyData {
 }
 
 pub enum FiatCurrency {
-    USD,
+    Usd,
 }
 
 pub enum CryptoCurrency {
-    BTC,
-    USDT,
+    Btc,
+    Usdt,
 }
 
 pub enum Currency {
@@ -21,15 +21,15 @@ pub enum Currency {
 
 fn get_data_for_fiat_currency(currency: Currency) -> CurrencyData {
     match currency {
-        Currency::FiatCurrency(FiatCurrency::USD) => CurrencyData {
+        Currency::FiatCurrency(FiatCurrency::Usd) => CurrencyData {
             code: String::from("USD"),
             name: String::from("US Dollar"),
         },
-        Currency::CryptoCurrency(CryptoCurrency::USDT) => CurrencyData {
+        Currency::CryptoCurrency(CryptoCurrency::Usdt) => CurrencyData {
             code: String::from("USDT"),
             name: String::from("Tether"),
         },
-        Currency::CryptoCurrency(CryptoCurrency::BTC) => CurrencyData {
+        Currency::CryptoCurrency(CryptoCurrency::Btc) => CurrencyData {
             code: String::from("BTC"),
             name: String::from("Bitcoin"),
         },

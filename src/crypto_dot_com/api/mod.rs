@@ -15,9 +15,9 @@ const API_BASE_URL: &str = "https://api.crypto.com";
 
 pub fn get_currency_string_for_url(currency: Currency) -> URLString {
     match currency {
-        Currency::FiatCurrency(USD) => String::from("USD"),
-        Currency::CryptoCurrency(USDT) => String::from("USDT"),
-        Currency::CryptoCurrency(BTC) => String::from("BTC"),
+        Currency::FiatCurrency(Usd) => String::from("USD"),
+        Currency::CryptoCurrency(Usdt) => String::from("USDT"),
+        Currency::CryptoCurrency(Btc) => String::from("BTC"),
         _ => panic!("Currency not supported"),
     }
 }
@@ -73,13 +73,13 @@ pub fn get_ticker_url(currency: Currency) -> URLString {
         "{}/{}/public/get-ticker?instrument_name={}_{}",
         API_BASE_URL,
         get_api_version_string(APIVersion::V2),
-        get_currency_string_for_url(Currency::CryptoCurrency(CryptoCurrency::BTC)),
+        get_currency_string_for_url(Currency::CryptoCurrency(CryptoCurrency::Btc)),
         get_currency_string_for_url(currency)
     );
 }
 
 pub fn request_ticker_data() -> Result<CryptoDotComResponse> {
-    let currency: Currency = Currency::CryptoCurrency(USDT);
+    let currency: Currency = Currency::CryptoCurrency(Usdt);
     let request_url: String = get_ticker_url(currency);
     let response_json: CryptoDotComResponse = request::request(request_url)?;
     return Ok(response_json);

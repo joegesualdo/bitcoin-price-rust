@@ -17,18 +17,18 @@ fn get_api_version_string(version: APIVersion) -> String {
 
 pub fn get_currency_string_for_url(currency: Currency) -> URLString {
     match currency {
-        Currency::CryptoCurrency(USDT) => String::from("USDT"),
-        Currency::CryptoCurrency(BTC) => String::from("BTC"),
+        Currency::CryptoCurrency(Usdt) => String::from("USDT"),
+        Currency::CryptoCurrency(Btc) => String::from("BTC"),
         _ => panic!("Currency not supported"),
     }
 }
 
 pub fn get_latest_price_url(currency: Currency) -> URLString {
-    return format!(
+    format!(
         "{}/api/{}/ticker?symbol={}{}",
         API_BASE_URL,
         get_api_version_string(APIVersion::V3),
-        get_currency_string_for_url(Currency::CryptoCurrency(CryptoCurrency::BTC)),
+        get_currency_string_for_url(Currency::CryptoCurrency(CryptoCurrency::Btc)),
         get_currency_string_for_url(currency)
-    );
+    )
 }
