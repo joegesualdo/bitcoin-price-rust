@@ -69,18 +69,18 @@ pub struct CryptoDotComResponse {
 }
 
 pub fn get_ticker_url(currency: Currency) -> URLString {
-    return format!(
+    format!(
         "{}/{}/public/get-ticker?instrument_name={}_{}",
         API_BASE_URL,
         get_api_version_string(APIVersion::V2),
         get_currency_string_for_url(Currency::CryptoCurrency(CryptoCurrency::Btc)),
         get_currency_string_for_url(currency)
-    );
+    )
 }
 
 pub fn request_ticker_data() -> Result<CryptoDotComResponse> {
     let currency: Currency = Currency::CryptoCurrency(Usdt);
     let request_url: String = get_ticker_url(currency);
     let response_json: CryptoDotComResponse = request::request(request_url)?;
-    return Ok(response_json);
+    Ok(response_json)
 }

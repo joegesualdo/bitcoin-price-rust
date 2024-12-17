@@ -18,5 +18,5 @@ pub fn get_price() -> Result<Price> {
     };
     let first = first_result?;
     let price = first.a.parse()?;
-    return Ok(price);
+    Ok(price)
 }
