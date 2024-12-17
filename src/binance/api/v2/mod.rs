@@ -31,5 +31,5 @@ pub fn request_latest_price() -> Result<BinanceTickerResponse> {
     let currency: Currency = Currency::CryptoCurrency(Usdt);
     let request_url: String = urls::get_latest_price_url(currency);
     let response: BinanceTickerResponse = request::request(request_url)?;
-    return Ok(response);
+    Ok(response)
 }
